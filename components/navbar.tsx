@@ -31,7 +31,7 @@ export default function Topbar() {
           </p>
         </div>
         <div className="relative flex items-center space-x-2 py-2">
-          <SocialsLink href="https://github.com/Sinister-00">
+          <SocialsLink href="https://github.com/dev-swapnilx">
             <GithubIcon />
           </SocialsLink>
           <SocialsLink href="https://www.linkedin.com/in/swapnil-2069961ba/">
