@@ -3,34 +3,34 @@ export default function Page() {
     {
       id: "1",
       name: "Personal Portfolio",
-      url: "https://github.com/Sinister-00/Portfolio_NextJS.git",
+      url: "https://github.com/dev-swapnilx/Portfolio_NextJS.git",
       description: "Personal Portfolio Made using NextJS",
     },
     {
       id: "2",
       name: "OmniBoard: A Multi-Gaming board for Specially Abled",
-      url: "https://github.com/Sinister-00/smart-board.git",
+      url: "https://github.com/dev-swapnilx/smart-board.git",
       description:
         "Smart, motorized board games with real-time web interface for immersive play",
     },
     {
       id: "3",
       name: "SafeStep: Early Fall Prediction for Senior Citizens with IOT",
-      url: "https://github.com/Sinister-00/SafeStep.git",
+      url: "https://github.com/dev-swapnilx/SafeStep.git",
       description:
         "IoT device with ML for fall prediction, triggering alarms and inflating jackets for elder safety",
     },
     {
       id: "4",
       name: "Argri-Site: Weed detection and removal drone",
-      url: "https://github.com/Sinister-00/Argri-Site.git",
+      url: "https://github.com/dev-swapnilx/Argri-Site.git",
       description:
         "Autonomous drone for weed detection using Raspberry Pi and ML, aiding precision herbicide application",
     },
     {
       id: "5",
       name: "CogniCodeML: v1.0 - C++ Consciousness Unleashed",
-      url: "https://github.com/Sinister-00/Machine_Learning",
+      url: "https://github.com/dev-swapnilx/Machine_Learning",
       description:
         "A C++ repository housing kNN, K-Means, and Neural Network implementations on MNIST Handwriting and Iris Datasets, optimized for efficiency and clarity.",
     },
