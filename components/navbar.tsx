@@ -27,7 +27,7 @@ export default function Topbar() {
         <div>
           <h1 className="font-bold text-xl">Swapnil</h1>
           <p className="text-sm text-neutral-500">
-            {`Computer Science & Engineering  Stundent`}
+            {`Software Developement Engineer @ Hindustan Times`}
           </p>
         </div>
         <div className="relative flex items-center space-x-2 py-2">
