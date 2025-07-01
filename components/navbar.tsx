@@ -90,7 +90,7 @@ export default function Topbar() {
           className="underline underline-offset-4"
           rel="noopener noreferrer"
           target="_blank"
-          href="https://drive.google.com/file/d/1eEfG5zNyrZs-tqtRAkChn82mZZpNylzK/view?usp=sharing"
+          href="https://drive.google.com/file/d/1HbxSQmZZ-2j16ol8fqGNyIs_7IxbuC_z/view?usp=sharing"
         >
           resume
         </a>
