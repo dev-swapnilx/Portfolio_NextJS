@@ -2,6 +2,7 @@ import "./globals.css";
 import clsx from "clsx";
 import type { Metadata } from "next";
 import { Roboto_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import Topbar from "../components/navbar";
 import Providers from "./providers";
 import Terminal from "../components/terminal";
@@ -28,6 +29,7 @@ export default function RootLayout({
             <Topbar />
             <main className="mb-8">{children}</main>
             <Terminal />
+            <Analytics />
           </div>
         </Providers>
       </body>
