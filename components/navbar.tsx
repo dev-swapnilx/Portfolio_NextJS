@@ -19,7 +19,8 @@ const navItems = {
 const resumeUrl = siteConfig.resumeUrl;
 
 export default function Topbar() {
-  let pathname = usePathname() || "/";
+  const rawPathname = usePathname() || "/";
+  const pathname = rawPathname === "/" || rawPathname === "/about" ? "/" : rawPathname;
   const { theme, setTheme } = useTheme();
 
   const { isOpen, toggleIsOpen } = useContext(TerminalContext);
