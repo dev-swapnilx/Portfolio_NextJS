@@ -11,6 +11,7 @@ import omniboardProject from "@/data/projects/omniboard.json";
 import safestepProject from "@/data/projects/safestep.json";
 import agrisiteProject from "@/data/projects/agrisite.json";
 import cognicodemlProject from "@/data/projects/cognicodeml.json";
+import personalNpxCardProject from "@/data/projects/personalNpxCard.json";
 
 // === Virtual File System (typed) ===
 type FileContent =
@@ -18,6 +19,7 @@ type FileContent =
       name: string;
       organization: string;
       designation: string;
+      location: string;
       email: string;
       phone: string;
       summary: string;
@@ -35,7 +37,8 @@ const filesystem: Record<string, Record<string, FileContent>> = {
     "omniboard.json": omniboardProject,
     "safestep.json": safestepProject,
     "agrisite.json": agrisiteProject,
-    "cognicodeml.json": cognicodemlProject
+    "cognicodeml.json": cognicodemlProject,
+    "personalNpxCard.json": personalNpxCardProject
   }
 };
 
@@ -50,6 +53,8 @@ const commands = [
   "date",
   "contact",
   "leetcode",
+  "skills",
+  "experience",
 ] as const;
 
 const routes = { about: "/about", projects: "/projects" } as const;
@@ -68,6 +73,54 @@ const helpCommand = [
   { command: "date", description: "Current date and time" },
   { command: "contact", description: "displays contact information" },
   { command: "leetcode", description: "displays leetcode profile" },
+  { command: "skills", description: "displays technical skills" },
+  { command: "experience", description: "displays work experience" },
+];
+
+const skills: { group: string; items: string }[] = [
+  {
+    group: "GenAI & LLM",
+    items:
+      "RAG, agentic & multi-agent workflows (LangGraph, LangChain), function calling, prompt engineering, fine-tuning, MCP, Hugging Face, LangSmith, MLOps",
+  },
+  {
+    group: "ML & Data",
+    items:
+      "embeddings, vector search, OCR & document processing, model serving (MLflow), Pinecone, FAISS",
+  },
+  {
+    group: "Languages & Frameworks",
+    items: "Python, C++, Go, SQL, Flask, Streamlit, Crawl4AI, Selenium, Puppeteer",
+  },
+  {
+    group: "Data & Cloud",
+    items:
+      "MongoDB, MySQL, Redis, Snowflake, Elasticsearch; AWS (Lambda, SageMaker, ECS, S3, DynamoDB, CloudWatch)",
+  },
+  {
+    group: "DevOps & Systems",
+    items:
+      "Docker, Kubernetes, Jenkins, Kafka, Airflow, Git, Linux, REST APIs, Microservices, Distributed Systems",
+  },
+];
+
+const experience: { role: string; org: string; period: string }[] = [
+  {
+    role: "Senior Data Scientist",
+    org: "Kissht (Si Creva Capital Services)",
+    period: "Apr 2026 – Present",
+  },
+  { role: "AI Engineer", org: "DevSecOps", period: "Aug 2025 – Apr 2026" },
+  {
+    role: "Software Engineer",
+    org: "Hindustan Times",
+    period: "Jul 2024 – Aug 2025",
+  },
+  {
+    role: "B.E. Computer Science",
+    org: "Thapar Institute of Engineering and Technology",
+    period: "2020 – 2024",
+  },
 ];
 
 // Union type for history entries
@@ -88,11 +141,8 @@ export default function Terminal() {
   const { isOpen, toggleIsOpen } = useContext(TerminalContext);
 
   const currentPath = pathname;
-  console.log("Path changed:", { pathname, currentPath });
 
   const getFilesInCurrentDir = (): string[] => {
-    console.log("Current path:", currentPath);
-
     // Handle root path
     if (currentPath === "/") {
       return ["about/", "projects/"];
@@ -112,6 +162,7 @@ export default function Terminal() {
         "safestep.json",
         "agrisite.json",
         "cognicodeml.json",
+        "personalNpxCard.json",
       ];
     }
 
@@ -394,7 +445,12 @@ export default function Terminal() {
 
 function CmdResult({ type, clear }: { type: string; clear: () => void }) {
   if (type === "welcome")
-    return <p>Hi guest, to see the list available commands, type `help`</p>;
+    return (
+      <p>
+        Hi, I{`'`}m Swapnil — AI Engineer. Type `help` for commands, or try
+        `skills`, `experience`, `cd projects`.
+      </p>
+    );
 
   if (type === "help")
     return (
@@ -421,11 +477,11 @@ function CmdResult({ type, clear }: { type: string; clear: () => void }) {
       <div className="flex flex-col space-y-2">
         <a
           className="underline underline-offset-4 text-blue-500 dark:text-blue-300"
-          href="mailto:swapnildhamu76@gmail.com"
+          href="mailto:swapnil.devx@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
         >
-          swapnildhamu76@gmail.com
+          swapnil.devx@gmail.com
         </a>
         <a
           className="underline underline-offset-4 text-blue-500 dark:text-blue-300"
@@ -451,6 +507,33 @@ function CmdResult({ type, clear }: { type: string; clear: () => void }) {
           leetcode.com/sswapnil_be20
         </a>
       </p>
+    );
+
+  if (type === "skills")
+    return (
+      <div className="flex flex-col space-y-1.5 text-xs font-mono">
+        {skills.map((s, i) => (
+          <div key={i}>
+            <span className="text-cyan-500 dark:text-cyan-400">{s.group}: </span>
+            <span className="text-green-600 dark:text-green-400">{s.items}</span>
+          </div>
+        ))}
+      </div>
+    );
+
+  if (type === "experience")
+    return (
+      <div className="flex flex-col space-y-1.5 text-xs font-mono">
+        {experience.map((e, i) => (
+          <div key={i} className="flex justify-between gap-4">
+            <span>
+              <span className="text-cyan-500 dark:text-cyan-400">{e.role}</span>
+              <span className="text-neutral-500"> @ {e.org}</span>
+            </span>
+            <span className="text-neutral-500 whitespace-nowrap">{e.period}</span>
+          </div>
+        ))}
+      </div>
     );
 
   return null;

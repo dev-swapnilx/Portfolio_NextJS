@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useContext } from "react";
 import { TerminalContext } from "../app/providers";
 import { siteConfig } from "../config/site";
+import info from "../data/about/info.json";
 const navItems = {
   "/": {
     name: "about",
@@ -29,19 +30,20 @@ export default function Topbar() {
     <header>
       <div className="mb-8 flex justify-between items-center">
         <div>
-          <h1 className="font-bold text-xl">Swapnil</h1>
+          <h1 className="font-bold text-xl">{info.name}</h1>
           <p className="text-sm text-neutral-500">
-            {`Software Developement Engineer @ Hindustan Times`}
+            {`${info.designation} · ${info.location}`}
           </p>
         </div>
         <div className="relative flex items-center space-x-2 py-2">
-          <SocialsLink href="https://github.com/dev-swapnilx">
+          <SocialsLink aria-label="GitHub profile" href="https://github.com/dev-swapnilx">
             <GithubIcon />
           </SocialsLink>
-          <SocialsLink href="https://www.linkedin.com/in/swapnil-2069961ba/">
+          <SocialsLink aria-label="LinkedIn profile" href="https://www.linkedin.com/in/swapnil-2069961ba/">
             <LinkedinIcon />
           </SocialsLink>
           <button
+            aria-label="Toggle color theme"
             onClick={() => {
               setTheme(theme === "light" ? "dark" : "light");
             }}
@@ -50,6 +52,7 @@ export default function Topbar() {
             <BrushIcon />
           </button>
             <button
+              aria-label="Toggle terminal"
               onClick={toggleIsOpen}
               className={clsx(
                 "h-7 w-7 rounded-md hover:bg-gray-100 hover:dark:bg-[#1c1c1c] flex justify-center items-center",
@@ -108,6 +111,7 @@ function SocialsLink(props: any) {
     <a
       {...props}
       target="_blank"
+      rel="noopener noreferrer"
       className="h-7 w-7 rounded-md hover:bg-gray-100 hover:dark:bg-[#1c1c1c] flex justify-center items-center"
     />
   );

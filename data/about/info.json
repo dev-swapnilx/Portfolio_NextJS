@@ -1,8 +1,9 @@
 {
   "name": "Swapnil",
-  "organization": "Hindustan Times",
-  "designation": "Software Development Engineer (SDE)",
-  "email": "swapnildhamu76@gmail.com",
-  "phone": "+91 62393 20323",
-  "summary": "Aspiring developer with a knack for frontend magic. I'm well-versed in JavaScript, TypeScript, React, and Node.js, and I'm eager to kickstart my career in a dynamic environment."
+  "designation": "AI Engineer",
+  "organization": "Kissht (Si Creva Capital Services Pvt. Ltd.)",
+  "location": "Gurugram, India",
+  "email": "swapnil.devx@gmail.com",
+  "phone": "+91 6239320323",
+  "summary": "AI Engineer with 2.5+ years shipping LLM-powered products into production across fintech and media platforms. I own features end-to-end — from retrieval and agent design to deployment and monitoring on AWS — delivering double-digit cost savings and 10x faster workflows while partnering with cross-functional teams."
 }
