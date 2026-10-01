@@ -1,5 +1,11 @@
 import { getProjects } from '@/utils/importProjects';
 
+export const metadata = {
+  title: "Projects",
+  description:
+    "Projects by Swapnil — AI Engineer: terminal-style portfolio, NPX dev card, and more.",
+};
+
 export default async function Page() {
   const pinnedRepositories = await getProjects();
   

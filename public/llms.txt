@@ -1,0 +1,29 @@
+# Swapnil — AI Engineer
+
+> AI Engineer with 2.5+ years shipping LLM-powered products into production across fintech and media platforms. Owns features end-to-end — from retrieval and agent design to deployment and monitoring on AWS — delivering double-digit cost savings and 10x faster workflows.
+
+## Current role
+
+Senior Data Scientist at Kissht (Si Creva Capital Services), Gurugram, India.
+
+## Expertise
+
+- GenAI & LLM: RAG, agentic & multi-agent workflows (LangGraph, LangChain), function calling, prompt engineering, fine-tuning, MCP, Hugging Face, LangSmith, MLOps
+- ML & Data: embeddings, vector search, OCR & document processing, model serving (MLflow), Pinecone, FAISS
+- Languages: Python, C++, Go, SQL
+- Data & Cloud: MongoDB, MySQL, Redis, Snowflake, Elasticsearch, AWS (Lambda, SageMaker, ECS, S3, DynamoDB, CloudWatch)
+- DevOps: Docker, Kubernetes, Jenkins, Kafka, Airflow, Microservices, Distributed Systems
+
+## Selected work
+
+- ML-Central: Dockerized single source of truth for feature & model code — cut infra costs 40% across 15+ models
+- NLP-driven global search service handling 50K+ daily requests, query latency 10s → 2s
+- Multi-agent sourcing service (LangGraph + Crawl4AI) automating newsletters & RSS across 400K+ companies
+- Real-time MLOps observability on Amazon ECS, reducing undetected failures by 85%
+
+## Links
+
+- GitHub: https://github.com/dev-swapnilx
+- LinkedIn: https://www.linkedin.com/in/swapnil-2069961ba/
+- LeetCode: https://leetcode.com/sswapnil_be20/
+- Contact: swapnil.devx@gmail.com
