@@ -52,7 +52,7 @@ const VISIBLE_CHIPS = 6;
 
 export default function Page() {
   return (
-    <div className="flex flex-col space-y-10">
+    <div className="flex flex-col space-y-10 max-w-[68ch]">
       <h1 className="sr-only">Swapnil — AI Engineer in Gurugram, India</h1>
       <script
         type="application/ld+json"
@@ -64,7 +64,7 @@ export default function Page() {
           AI Engineer shipping LLM products to production — RAG, agents &
           MLOps on AWS.
         </p>
-        <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+        <p className="text-sm leading-[1.7] text-neutral-600 dark:text-neutral-400">
           <Metrics text="2.5+ yrs across fintech & media · double-digit cost savings · 10× faster workflows." />
         </p>
       </header>
@@ -87,7 +87,7 @@ export default function Page() {
                 </span>
               </div>
               {e.impact && (
-                <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400 leading-[1.7]">
                   <Metrics text={e.impact} />
                 </p>
               )}
