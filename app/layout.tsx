@@ -1,7 +1,8 @@
 import "./globals.css";
 import clsx from "clsx";
+import { headers } from "next/headers";
 import type { Metadata, Viewport } from "next";
-import { Roboto_Mono } from "next/font/google";
+import { Inter, Roboto_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import Topbar from "../components/navbar";
 import Providers from "./providers";
@@ -9,8 +10,19 @@ import Terminal from "../components/terminal";
 import { siteConfig } from "../config/site";
 import info from "../data/about/info.json";
 
+// Dynamic rendering is required for the per-request CSP nonce (middleware.ts)
+export const dynamic = "force-dynamic";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
 const roboto_mono = Roboto_Mono({
   subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto-mono",
 });
 
 const description =
@@ -110,14 +122,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Per-request CSP nonce from middleware, for next-themes' inline script
+  const nonce = headers().get("x-nonce") ?? undefined;
   return (
-    <html lang="en" className={roboto_mono.className}>
+    <html
+      lang="en"
+      className={clsx(inter.variable, roboto_mono.variable, "font-sans")}
+    >
       <body className="antialiased min-h-screen">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
-        <Providers>
+        <Providers nonce={nonce}>
           <div className="flex flex-col container pt-8">
             <Topbar />
             <main className="mb-8">{children}</main>

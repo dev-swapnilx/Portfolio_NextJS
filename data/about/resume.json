@@ -2,23 +2,23 @@
   "skills": [
     {
       "group": "GenAI & LLM",
-      "items": "RAG, agentic & multi-agent workflows (LangGraph, LangChain), function calling, prompt engineering, fine-tuning, MCP, Hugging Face, LangSmith, MLOps"
+      "items": ["RAG", "Multi-agent workflows", "LangGraph", "LangChain", "Function calling", "Prompt engineering", "Fine-tuning", "MCP", "Hugging Face", "LangSmith", "MLOps"]
     },
     {
       "group": "ML & Data",
-      "items": "embeddings, vector search, OCR & document processing, model serving (MLflow), Pinecone, FAISS"
+      "items": ["Embeddings", "Vector search", "OCR", "MLflow", "Pinecone", "FAISS"]
     },
     {
       "group": "Languages & Frameworks",
-      "items": "Python, C++, Go, SQL, Flask, Streamlit, Crawl4AI, Selenium, Puppeteer"
+      "items": ["Python", "C++", "Go", "SQL", "Flask", "Streamlit", "Crawl4AI", "Selenium", "Puppeteer"]
     },
     {
       "group": "Data & Cloud",
-      "items": "MongoDB, MySQL, Redis, Snowflake, Elasticsearch; AWS (Lambda, SageMaker, ECS, S3, DynamoDB, CloudWatch)"
+      "items": ["MongoDB", "MySQL", "Redis", "Snowflake", "Elasticsearch", "AWS Lambda", "SageMaker", "Amazon ECS", "S3", "DynamoDB", "CloudWatch"]
     },
     {
       "group": "DevOps & Systems",
-      "items": "Docker, Kubernetes, Jenkins, Kafka, Airflow, Git, Linux, REST APIs, Microservices, Distributed Systems"
+      "items": ["Docker", "Kubernetes", "Jenkins", "Kafka", "Airflow", "Git", "Linux", "REST APIs", "Microservices", "Distributed Systems"]
     }
   ],
   "experience": [

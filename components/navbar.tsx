@@ -32,7 +32,7 @@ export default function Topbar() {
         <div className="flex items-center space-x-3">
           <div
             aria-hidden="true"
-            className="h-11 w-11 rounded-lg bg-gray-100 dark:bg-[#1c1c1c] border border-[#ecebeb] dark:border-[#333] flex items-center justify-center font-bold text-lg select-none"
+            className="h-11 w-11 rounded-lg bg-gray-100 dark:bg-[#1c1c1c] border border-[#ecebeb] dark:border-[#333] flex items-center justify-center font-bold text-lg select-none font-mono"
           >
             {info.name.charAt(0)}
             <span className="text-green-700 dark:text-green-400 cursor-blink font-normal">
