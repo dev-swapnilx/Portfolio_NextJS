@@ -259,11 +259,11 @@ export default function Terminal() {
         if (["/about", "/projects"].includes(targetPath)) {
           router.push(targetPath);
         } else {
-          output = <p className="text-red-500">bash: cd: {arg}: No such directory</p>;
+          output = <p className="text-red-400">bash: cd: {arg}: No such directory</p>;
         }
       } else if (currentPath !== "/" && arg) {
         output = (
-          <p className="text-red-500">
+          <p className="text-red-400">
             bash: cd: {arg}: no such file or directory
           </p>
         );
@@ -271,7 +271,7 @@ export default function Terminal() {
         router.push(routes[arg as RouteKey]);
       } else if (arg) {
         output = (
-          <p className="text-red-500">
+          <p className="text-red-400">
             bash: cd: {arg}: No such file or directory
           </p>
         );
@@ -287,23 +287,29 @@ export default function Terminal() {
       const fileData = filesystem[currentPath]?.[arg];
       if (fileData) {
         output = (
-          <pre className="text-green-600 dark:text-green-400 text-xs font-mono whitespace-pre-wrap">
+          <pre className="text-green-700 dark:text-green-400 text-xs font-mono whitespace-pre-wrap">
             {JSON.stringify(fileData, null, 2)}
           </pre>
         );
       } else {
-        output = <p className="text-red-500">cat: {arg}: No such file</p>;
+        output = <p className="text-red-400">cat: {arg}: No such file</p>;
       }
     } else if (cmd === "theme" && arg && ["dark", "light"].includes(arg)) {
       setTheme(arg);
       output = <p>Theme switched to {arg}</p>;
+    } else if (cmd === "theme") {
+      output = (
+        <p className="text-red-400">
+          theme: invalid option{arg ? ` '${arg}'` : ""} — usage: theme &lt;dark | light&gt;
+        </p>
+      );
     } else if (
       commands.includes(cmd as any) &&
       !["cd", "ls", "cat"].includes(cmd)
     ) {
       // handled by CmdResult
     } else if (trimmed) {
-      output = <p className="text-red-500">{trimmed}: command not found</p>;
+      output = <p className="text-red-400">{trimmed}: command not found</p>;
     }
 
     setHistory((prev) => [...prev, trimmed]);
@@ -329,17 +335,22 @@ export default function Terminal() {
 
   return (
     <div
-      className="relative h-60 mb-6 bg-gray-100 dark:bg-[#171717] rounded-md text-sm overflow-hidden flex flex-col"
+      className="relative h-60 mb-6 bg-gray-100 dark:bg-[#171717] rounded-md text-sm overflow-hidden flex flex-col focus-within:ring-1 focus-within:ring-neutral-400"
       onClick={() => inputRef.current?.focus()}
     >
       <div className="sticky top-0 left-0 right-0 h-6 bg-zinc-300 dark:bg-[#323232] flex pl-2 ">
         <div className="flex space-x-2 items-center my-auto">
-          <div
-            className="h-3 w-3 bg-red-500 rounded-full flex justify-center items-center cursor-pointer"
-            onClick={toggleIsOpen}
-          ></div>
-          <div className="h-3 w-3 bg-yellow-500 rounded-full"></div>
-          <div className="h-3 w-3 bg-green-600 rounded-full"></div>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleIsOpen();
+            }}
+            aria-label="Close terminal"
+            className="h-3 w-3 bg-red-500 rounded-full cursor-pointer focus-visible:ring-2 focus-visible:ring-red-300 outline-none"
+          />
+          <div aria-hidden="true" className="h-3 w-3 bg-yellow-500 rounded-full"></div>
+          <div aria-hidden="true" className="h-3 w-3 bg-green-600 rounded-full"></div>
         </div>
       </div>
 
@@ -359,7 +370,7 @@ export default function Terminal() {
                   <span className="text-yellow-500 dark:text-yellow-300">
                     →{" "}
                   </span>
-                  <span className="text-pink-500 dark:text-pink-300">~ </span>
+                  <span className="text-pink-600 dark:text-pink-300">~ </span>
                   {data}
                 </p>
 
@@ -373,7 +384,7 @@ export default function Terminal() {
           <div className="flex">
             <p>
               <span className="text-yellow-500 dark:text-yellow-300">→ </span>
-              <span className="text-pink-500 dark:text-pink-300">~ </span>
+              <span className="text-pink-600 dark:text-pink-300">~ </span>
             </p>
 
             <form onSubmit={handleSubmit} className="flex-1 ml-2">
@@ -440,16 +451,12 @@ function CmdResult({ type, clear }: { type: string; clear: () => void }) {
         <a
           className="underline underline-offset-4 text-blue-500 dark:text-blue-300"
           href="mailto:swapnil.devx@gmail.com"
-          target="_blank"
-          rel="noopener noreferrer"
         >
           swapnil.devx@gmail.com
         </a>
         <a
           className="underline underline-offset-4 text-blue-500 dark:text-blue-300"
           href="tel:+916239320323"
-          target="_blank"
-          rel="noopener noreferrer"
         >
           +91 62393 20323
         </a>
@@ -467,6 +474,7 @@ function CmdResult({ type, clear }: { type: string; clear: () => void }) {
           rel="noopener noreferrer"
         >
           leetcode.com/sswapnil_be20
+          <span className="sr-only"> (opens in new tab)</span>
         </a>
       </p>
     );
@@ -477,7 +485,7 @@ function CmdResult({ type, clear }: { type: string; clear: () => void }) {
         {skills.map((s, i) => (
           <div key={i}>
             <span className="text-cyan-500 dark:text-cyan-400">{s.group}: </span>
-            <span className="text-green-600 dark:text-green-400">{s.items}</span>
+            <span className="text-green-700 dark:text-green-400">{s.items}</span>
           </div>
         ))}
       </div>
@@ -490,9 +498,9 @@ function CmdResult({ type, clear }: { type: string; clear: () => void }) {
           <div key={i} className="flex justify-between gap-4">
             <span>
               <span className="text-cyan-500 dark:text-cyan-400">{e.role}</span>
-              <span className="text-neutral-500"> @ {e.org}</span>
+              <span className="text-neutral-600 dark:text-neutral-400"> @ {e.org}</span>
             </span>
-            <span className="text-neutral-500 whitespace-nowrap">{e.period}</span>
+            <span className="text-neutral-600 dark:text-neutral-400 whitespace-nowrap">{e.period}</span>
           </div>
         ))}
       </div>

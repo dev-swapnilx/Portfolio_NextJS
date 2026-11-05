@@ -25,7 +25,7 @@ function Chips({ project }: { project: Project }) {
       {project.stack.map((tech) => (
         <span
           key={tech}
-          className="text-[11px] px-1.5 py-0.5 rounded border border-[#ecebeb] dark:border-[#333] text-neutral-500"
+          className="text-xs px-1.5 py-0.5 rounded border border-[#ecebeb] dark:border-[#333] text-neutral-600 dark:text-neutral-400"
         >
           {tech}
         </span>
@@ -40,17 +40,17 @@ function CardBody({ project }: { project: Project }) {
       <div className="flex justify-between items-baseline gap-3">
         <h3 className="text-base font-medium">{project.name}</h3>
         {project.year && (
-          <span className="text-xs text-neutral-500 whitespace-nowrap">
+          <span className="text-xs text-neutral-600 dark:text-neutral-400 whitespace-nowrap">
             {project.year}
           </span>
         )}
       </div>
       {project.org && (
-        <p className="text-xs text-green-600 dark:text-green-400">
+        <p className="text-xs text-green-700 dark:text-green-400">
           @ {project.org}
         </p>
       )}
-      <p className="text-sm text-neutral-500 flex-1">{project.description}</p>
+      <p className="text-sm text-neutral-600 dark:text-neutral-400 flex-1">{project.description}</p>
       <Chips project={project} />
     </>
   );
@@ -63,6 +63,15 @@ export default async function Page() {
   const projects = await getProjects();
   const work = projects.filter((p) => p.kind === "work");
   const personal = projects.filter((p) => p.kind !== "work");
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://devxswapnil.in/" },
+      { "@type": "ListItem", position: 2, name: "Projects", item: "https://devxswapnil.in/projects" },
+    ],
+  };
 
   const collectionJsonLd = {
     "@context": "https://schema.org",
@@ -90,14 +99,19 @@ export default async function Page() {
 
   return (
     <div className="flex flex-col space-y-8">
+      <h1 className="sr-only">Projects by Swapnil</h1>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
 
       <section>
         <h2 className="text-sm font-medium mb-3">
-          <span className="text-green-600 dark:text-green-400"># </span>
+          <span className="text-green-700 dark:text-green-400"># </span>
           Production work
         </h2>
         <div className="grid grid-cols-1 gap-4">
@@ -111,7 +125,7 @@ export default async function Page() {
 
       <section>
         <h2 className="text-sm font-medium mb-3">
-          <span className="text-green-600 dark:text-green-400"># </span>
+          <span className="text-green-700 dark:text-green-400"># </span>
           Earlier projects
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -124,6 +138,7 @@ export default async function Page() {
               href={p.url}
             >
               <CardBody project={p} />
+              <span className="sr-only"> (opens GitHub in new tab)</span>
             </a>
           ))}
         </div>

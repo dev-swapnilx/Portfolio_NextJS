@@ -1,7 +1,7 @@
 {
   "name": "SwapCard: Your Terminal-Powered Dev Intro",
   "url": "https://github.com/dev-swapnilx/Personal_NPX_Card.git",
-  "description": "Run `npx dev-swapnilx` and get an interactive showcase of skills, projects & contact — a digital business card in your terminal",
+  "description": "Run `npx sinister-code` and get an interactive showcase of skills, projects & contact — a digital business card in your terminal",
   "stack": [
     "JavaScript",
     "Node.js",

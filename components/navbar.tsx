@@ -35,13 +35,13 @@ export default function Topbar() {
             className="h-11 w-11 rounded-lg bg-gray-100 dark:bg-[#1c1c1c] border border-[#ecebeb] dark:border-[#333] flex items-center justify-center font-bold text-lg select-none"
           >
             {info.name.charAt(0)}
-            <span className="text-green-600 dark:text-green-400 cursor-blink font-normal">
+            <span className="text-green-700 dark:text-green-400 cursor-blink font-normal">
               _
             </span>
           </div>
           <div>
-            <h1 className="font-bold text-2xl leading-tight">{info.name}</h1>
-            <p className="text-sm text-neutral-500">
+            <p className="font-bold text-2xl leading-tight">{info.name}</p>
+            <p className="text-sm text-neutral-600 dark:text-neutral-400">
               <span className="text-neutral-700 dark:text-neutral-300">
                 {info.designation}
               </span>
@@ -50,10 +50,16 @@ export default function Topbar() {
           </div>
         </div>
         <div className="relative flex items-center space-x-2 py-2">
-          <SocialsLink aria-label="GitHub profile" href="https://github.com/dev-swapnilx">
+          <SocialsLink
+            aria-label="GitHub profile (opens in new tab)"
+            href="https://github.com/dev-swapnilx"
+          >
             <GithubIcon />
           </SocialsLink>
-          <SocialsLink aria-label="LinkedIn profile" href="https://www.linkedin.com/in/swapnil-2069961ba/">
+          <SocialsLink
+            aria-label="LinkedIn profile (opens in new tab)"
+            href="https://www.linkedin.com/in/swapnil-2069961ba/"
+          >
             <LinkedinIcon />
           </SocialsLink>
           <button
@@ -98,7 +104,7 @@ export default function Topbar() {
                 className={clsx(
                   "transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle",
                   {
-                    "text-neutral-500": !isActive,
+                    "text-neutral-600 dark:text-neutral-400": !isActive,
                   }
                 )}
               >
@@ -113,7 +119,7 @@ export default function Topbar() {
           target="_blank"
           href={resumeUrl}
         >
-          resume
+          resume<span className="sr-only"> (opens in new tab)</span>
         </a>
       </nav>
     </header>
