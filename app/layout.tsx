@@ -1,6 +1,6 @@
 import "./globals.css";
 import clsx from "clsx";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Roboto_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import Topbar from "../components/navbar";
@@ -23,18 +23,6 @@ export const metadata: Metadata = {
     template: "%s — Swapnil",
   },
   description,
-  keywords: [
-    "Swapnil",
-    "AI Engineer",
-    "LLM",
-    "RAG",
-    "multi-agent systems",
-    "LangGraph",
-    "LangChain",
-    "MLOps",
-    "Gurugram",
-    "portfolio",
-  ],
   authors: [{ name: info.name, url: siteConfig.url }],
   creator: info.name,
   openGraph: {
@@ -50,6 +38,13 @@ export const metadata: Metadata = {
     description,
   },
   robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#111111" },
+  ],
 };
 
 // JSON-LD entity graph — parsed by Google rich results and AI search engines
@@ -93,7 +88,7 @@ const personJsonLd = {
         "https://github.com/dev-swapnilx",
         "https://www.linkedin.com/in/swapnil-2069961ba/",
         "https://leetcode.com/sswapnil_be20/",
-        "https://www.npmjs.com/package/dev-swapnilx",
+        "https://www.npmjs.com/package/sinister-code",
       ],
       knowsAbout: [
         "Large Language Models",

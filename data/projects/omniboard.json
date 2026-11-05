@@ -1,5 +1,11 @@
 {
   "name": "OmniBoard: A Multi-Gaming board for Specially Abled",
   "url": "https://github.com/dev-swapnilx/smart-board.git",
-  "description": "Smart, motorized board games with real-time web interface for immersive play"
+  "description": "Smart, motorized board games with real-time web interface for immersive play",
+  "stack": [
+    "TypeScript",
+    "C++",
+    "IoT"
+  ],
+  "year": "2023"
 }

@@ -8,9 +8,6 @@
   }
 }
 
-html {
-  min-width: 360px;
-}
 
 .container {
   width: 100%;
@@ -26,6 +23,22 @@ html {
     padding-right: 2rem;
     padding-left: 2rem;
   }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 760px;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  animation: blink 1.2s steps(1) infinite;
 }
 
 .scrollcontainer::-webkit-scrollbar {

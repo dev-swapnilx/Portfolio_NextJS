@@ -13,20 +13,13 @@ import agrisiteProject from "@/data/projects/agrisite.json";
 import cognicodemlProject from "@/data/projects/cognicodeml.json";
 import personalNpxCardProject from "@/data/projects/personalNpxCard.json";
 import resume from "@/data/about/resume.json";
+import mlcentralProject from "@/data/projects/mlcentral.json";
+import multiagentProject from "@/data/projects/multiagentSourcing.json";
+import nlpSearchProject from "@/data/projects/nlpGlobalSearch.json";
 
-// === Virtual File System (typed) ===
-type FileContent =
-  | {
-      name: string;
-      organization: string;
-      designation: string;
-      location: string;
-      email: string;
-      phone: string;
-      summary: string;
-    }
-  | { name: string; url: string; description: string }
-  | null;
+// === Virtual File System ===
+// cat just pretty-prints whatever JSON lives at the path
+type FileContent = Record<string, unknown> | null;
 
 const filesystem: Record<string, Record<string, FileContent>> = {
   "/": { "about/": null, "projects/": null },
@@ -39,7 +32,10 @@ const filesystem: Record<string, Record<string, FileContent>> = {
     "safestep.json": safestepProject,
     "agrisite.json": agrisiteProject,
     "cognicodeml.json": cognicodemlProject,
-    "personalNpxCard.json": personalNpxCardProject
+    "personalNpxCard.json": personalNpxCardProject,
+    "mlcentral.json": mlcentralProject,
+    "multiagentSourcing.json": multiagentProject,
+    "nlpGlobalSearch.json": nlpSearchProject
   }
 };
 
@@ -91,7 +87,7 @@ export default function Terminal() {
   const [tabHint, setTabHint] = useState("");
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const terminalEndRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const pathname = usePathname();
   const { setTheme } = useTheme();
@@ -120,6 +116,9 @@ export default function Terminal() {
         "agrisite.json",
         "cognicodeml.json",
         "personalNpxCard.json",
+        "mlcentral.json",
+        "multiagentSourcing.json",
+        "nlpGlobalSearch.json",
       ];
     }
 
@@ -128,12 +127,19 @@ export default function Terminal() {
   };
 
   const scrollToBottom = () => {
-    terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Scroll only the terminal pane, never the page
+    const el = scrollRef.current;
+    if (el) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
   };
 
   useEffect(() => {
     scrollToBottom();
   }, [history, tabHint]);
+
+  // Focus without scrolling the page down to the terminal on load
+  useEffect(() => {
+    inputRef.current?.focus({ preventScroll: true });
+  }, []);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const trimmed = value.trim();
@@ -253,11 +259,11 @@ export default function Terminal() {
         if (["/about", "/projects"].includes(targetPath)) {
           router.push(targetPath);
         } else {
-          output = <p className="text-red-500">bash: cd: {arg}: No such directory</p>;
+          output = <p className="text-red-400">bash: cd: {arg}: No such directory</p>;
         }
       } else if (currentPath !== "/" && arg) {
         output = (
-          <p className="text-red-500">
+          <p className="text-red-400">
             bash: cd: {arg}: no such file or directory
           </p>
         );
@@ -265,7 +271,7 @@ export default function Terminal() {
         router.push(routes[arg as RouteKey]);
       } else if (arg) {
         output = (
-          <p className="text-red-500">
+          <p className="text-red-400">
             bash: cd: {arg}: No such file or directory
           </p>
         );
@@ -281,23 +287,29 @@ export default function Terminal() {
       const fileData = filesystem[currentPath]?.[arg];
       if (fileData) {
         output = (
-          <pre className="text-green-600 dark:text-green-400 text-xs font-mono whitespace-pre-wrap">
+          <pre className="text-green-700 dark:text-green-400 text-xs font-mono whitespace-pre-wrap">
             {JSON.stringify(fileData, null, 2)}
           </pre>
         );
       } else {
-        output = <p className="text-red-500">cat: {arg}: No such file</p>;
+        output = <p className="text-red-400">cat: {arg}: No such file</p>;
       }
     } else if (cmd === "theme" && arg && ["dark", "light"].includes(arg)) {
       setTheme(arg);
       output = <p>Theme switched to {arg}</p>;
+    } else if (cmd === "theme") {
+      output = (
+        <p className="text-red-400">
+          theme: invalid option{arg ? ` '${arg}'` : ""} — usage: theme &lt;dark | light&gt;
+        </p>
+      );
     } else if (
       commands.includes(cmd as any) &&
       !["cd", "ls", "cat"].includes(cmd)
     ) {
       // handled by CmdResult
     } else if (trimmed) {
-      output = <p className="text-red-500">{trimmed}: command not found</p>;
+      output = <p className="text-red-400">{trimmed}: command not found</p>;
     }
 
     setHistory((prev) => [...prev, trimmed]);
@@ -323,21 +335,26 @@ export default function Terminal() {
 
   return (
     <div
-      className="relative h-60 mb-6 bg-gray-100 dark:bg-[#171717] rounded-md text-sm overflow-hidden flex flex-col"
+      className="relative h-60 mb-6 bg-gray-100 dark:bg-[#171717] rounded-md text-sm overflow-hidden flex flex-col focus-within:ring-1 focus-within:ring-neutral-400"
       onClick={() => inputRef.current?.focus()}
     >
       <div className="sticky top-0 left-0 right-0 h-6 bg-zinc-300 dark:bg-[#323232] flex pl-2 ">
         <div className="flex space-x-2 items-center my-auto">
-          <div
-            className="h-3 w-3 bg-red-500 rounded-full flex justify-center items-center cursor-pointer"
-            onClick={toggleIsOpen}
-          ></div>
-          <div className="h-3 w-3 bg-yellow-500 rounded-full"></div>
-          <div className="h-3 w-3 bg-green-600 rounded-full"></div>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleIsOpen();
+            }}
+            aria-label="Close terminal"
+            className="h-3 w-3 bg-red-500 rounded-full cursor-pointer focus-visible:ring-2 focus-visible:ring-red-300 outline-none"
+          />
+          <div aria-hidden="true" className="h-3 w-3 bg-yellow-500 rounded-full"></div>
+          <div aria-hidden="true" className="h-3 w-3 bg-green-600 rounded-full"></div>
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto scrollcontainer">
+      <div className="flex-1 overflow-y-auto scrollcontainer" ref={scrollRef}>
         <div className="px-1 py-1">
           {history.map((entry, i) => {
             if (typeof entry === "object" && "__output" in entry) {
@@ -353,7 +370,7 @@ export default function Terminal() {
                   <span className="text-yellow-500 dark:text-yellow-300">
                     →{" "}
                   </span>
-                  <span className="text-pink-500 dark:text-pink-300">~ </span>
+                  <span className="text-pink-600 dark:text-pink-300">~ </span>
                   {data}
                 </p>
 
@@ -367,7 +384,7 @@ export default function Terminal() {
           <div className="flex">
             <p>
               <span className="text-yellow-500 dark:text-yellow-300">→ </span>
-              <span className="text-pink-500 dark:text-pink-300">~ </span>
+              <span className="text-pink-600 dark:text-pink-300">~ </span>
             </p>
 
             <form onSubmit={handleSubmit} className="flex-1 ml-2">
@@ -375,7 +392,6 @@ export default function Terminal() {
                 type="text"
                 aria-label="Terminal command input"
                 className="w-full border-none outline-none bg-transparent"
-                autoFocus
                 value={value}
                 onChange={(e) => {
                   setValue(e.target.value);
@@ -395,7 +411,6 @@ export default function Terminal() {
             </div>
           )}
         </div>
-        <div ref={terminalEndRef} />
       </div>
     </div>
   );
@@ -436,16 +451,12 @@ function CmdResult({ type, clear }: { type: string; clear: () => void }) {
         <a
           className="underline underline-offset-4 text-blue-500 dark:text-blue-300"
           href="mailto:swapnil.devx@gmail.com"
-          target="_blank"
-          rel="noopener noreferrer"
         >
           swapnil.devx@gmail.com
         </a>
         <a
           className="underline underline-offset-4 text-blue-500 dark:text-blue-300"
           href="tel:+916239320323"
-          target="_blank"
-          rel="noopener noreferrer"
         >
           +91 62393 20323
         </a>
@@ -463,6 +474,7 @@ function CmdResult({ type, clear }: { type: string; clear: () => void }) {
           rel="noopener noreferrer"
         >
           leetcode.com/sswapnil_be20
+          <span className="sr-only"> (opens in new tab)</span>
         </a>
       </p>
     );
@@ -473,7 +485,7 @@ function CmdResult({ type, clear }: { type: string; clear: () => void }) {
         {skills.map((s, i) => (
           <div key={i}>
             <span className="text-cyan-500 dark:text-cyan-400">{s.group}: </span>
-            <span className="text-green-600 dark:text-green-400">{s.items}</span>
+            <span className="text-green-700 dark:text-green-400">{s.items}</span>
           </div>
         ))}
       </div>
@@ -486,9 +498,9 @@ function CmdResult({ type, clear }: { type: string; clear: () => void }) {
           <div key={i} className="flex justify-between gap-4">
             <span>
               <span className="text-cyan-500 dark:text-cyan-400">{e.role}</span>
-              <span className="text-neutral-500"> @ {e.org}</span>
+              <span className="text-neutral-600 dark:text-neutral-400"> @ {e.org}</span>
             </span>
-            <span className="text-neutral-500 whitespace-nowrap">{e.period}</span>
+            <span className="text-neutral-600 dark:text-neutral-400 whitespace-nowrap">{e.period}</span>
           </div>
         ))}
       </div>
