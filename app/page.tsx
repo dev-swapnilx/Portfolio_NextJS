@@ -1,17 +1,86 @@
 import info from "@/data/about/info.json";
+import resume from "@/data/about/resume.json";
+
+export const metadata = { alternates: { canonical: "/" } };
+
+const profilePageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": "https://devxswapnil.in/#profilepage",
+  url: "https://devxswapnil.in/",
+  name: "Swapnil — AI Engineer",
+  isPartOf: { "@id": "https://devxswapnil.in/#website" },
+  mainEntity: { "@id": "https://devxswapnil.in/#person" },
+  dateModified: "2026-11-05",
+};
 
 export default function Page() {
   return (
-    <div className="flex flex-col space-y-6">
+    <div className="flex flex-col space-y-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageJsonLd) }}
+      />
+
       <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
         {info.summary}
       </p>
+
+      <section>
+        <h2 className="text-sm font-medium mb-3">Experience</h2>
+        <ul className="space-y-3">
+          {resume.experience.map((e, i) => (
+            <li key={i} className="text-sm">
+              <div className="flex justify-between gap-4">
+                <span>
+                  <span className="text-neutral-800 dark:text-neutral-200">
+                    {e.role}
+                  </span>
+                  <span className="text-neutral-500"> @ {e.org}</span>
+                </span>
+                <span className="text-neutral-500 text-xs whitespace-nowrap pt-0.5">
+                  {e.period}
+                </span>
+              </div>
+              {e.impact && (
+                <p className="mt-1 text-xs text-neutral-500 leading-relaxed">
+                  {e.impact}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-sm font-medium mb-3">Skills</h2>
+        <ul className="space-y-1.5">
+          {resume.skills.map((s, i) => (
+            <li key={i} className="text-xs leading-relaxed">
+              <span className="text-neutral-800 dark:text-neutral-200">
+                {s.group}:{" "}
+              </span>
+              <span className="text-neutral-500">{s.items}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <p className="text-xs text-neutral-500">
         Try <code className="text-pink-500 dark:text-pink-300">skills</code>,{" "}
         <code className="text-pink-500 dark:text-pink-300">experience</code>, or{" "}
         <code className="text-pink-500 dark:text-pink-300">help</code> in the
         terminal below.
+      </p>
+
+      <p className="text-xs text-neutral-500">
+        <a
+          className="underline underline-offset-4"
+          href={`mailto:${info.email}`}
+        >
+          {info.email}
+        </a>{" "}
+        · Last updated Nov 2026
       </p>
     </div>
   );

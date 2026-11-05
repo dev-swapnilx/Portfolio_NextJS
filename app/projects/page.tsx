@@ -1,17 +1,53 @@
 import { getProjects } from '@/utils/importProjects';
 
+const description =
+  "Projects by Swapnil — AI Engineer: terminal-style portfolio, NPX dev card, and more.";
+
 export const metadata = {
   title: "Projects",
-  description:
-    "Projects by Swapnil — AI Engineer: terminal-style portfolio, NPX dev card, and more.",
+  description,
+  alternates: { canonical: "/projects" },
+  openGraph: {
+    title: "Projects — Swapnil",
+    description,
+    url: "/projects",
+    type: "website",
+  },
 };
 
 export default async function Page() {
   const pinnedRepositories = await getProjects();
-  
+
+  const collectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://devxswapnil.in/projects#page",
+    url: "https://devxswapnil.in/projects",
+    name: "Projects — Swapnil",
+    isPartOf: { "@id": "https://devxswapnil.in/#website" },
+    about: { "@id": "https://devxswapnil.in/#person" },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: pinnedRepositories?.map((repo, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        item: {
+          "@type": "SoftwareSourceCode",
+          name: repo.name,
+          description: repo.description,
+          codeRepository: repo.url.replace(/\.git$/, ""),
+          author: { "@id": "https://devxswapnil.in/#person" },
+        },
+      })),
+    },
+  };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
+      />
       {pinnedRepositories?.map((repo) => (
         <a
           key={repo.id}

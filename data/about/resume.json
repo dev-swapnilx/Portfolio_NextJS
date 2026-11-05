@@ -1,0 +1,50 @@
+{
+  "skills": [
+    {
+      "group": "GenAI & LLM",
+      "items": "RAG, agentic & multi-agent workflows (LangGraph, LangChain), function calling, prompt engineering, fine-tuning, MCP, Hugging Face, LangSmith, MLOps"
+    },
+    {
+      "group": "ML & Data",
+      "items": "embeddings, vector search, OCR & document processing, model serving (MLflow), Pinecone, FAISS"
+    },
+    {
+      "group": "Languages & Frameworks",
+      "items": "Python, C++, Go, SQL, Flask, Streamlit, Crawl4AI, Selenium, Puppeteer"
+    },
+    {
+      "group": "Data & Cloud",
+      "items": "MongoDB, MySQL, Redis, Snowflake, Elasticsearch; AWS (Lambda, SageMaker, ECS, S3, DynamoDB, CloudWatch)"
+    },
+    {
+      "group": "DevOps & Systems",
+      "items": "Docker, Kubernetes, Jenkins, Kafka, Airflow, Git, Linux, REST APIs, Microservices, Distributed Systems"
+    }
+  ],
+  "experience": [
+    {
+      "role": "Senior Data Scientist",
+      "org": "Kissht (Si Creva Capital Services)",
+      "period": "Apr 2026 – Present",
+      "impact": "Built ML-Central, a Dockerized single source of truth cutting infra costs 40% across 15+ models; real-time MLOps observability on Amazon ECS reducing undetected failures by 85%."
+    },
+    {
+      "role": "AI Engineer",
+      "org": "DevSecOps",
+      "period": "Aug 2025 – Apr 2026",
+      "impact": "Multi-agent sourcing service (LangGraph + Crawl4AI) automating newsletters & RSS across 400K+ companies; extraction pipelines processing 80K+ news articles daily."
+    },
+    {
+      "role": "Software Engineer",
+      "org": "Hindustan Times",
+      "period": "Jul 2024 – Aug 2025",
+      "impact": "NLP-driven global search handling 50K+ daily requests, cutting query latency from 10s to 2s with a 90% click-through rate; conversational RAG chatbot boosting engagement 25%."
+    },
+    {
+      "role": "B.E. Computer Science",
+      "org": "Thapar Institute of Engineering and Technology",
+      "period": "2020 – 2024",
+      "impact": ""
+    }
+  ]
+}

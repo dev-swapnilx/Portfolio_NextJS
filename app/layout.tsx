@@ -52,35 +52,61 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-// JSON-LD Person schema — parsed by Google rich results and AI search engines
+// JSON-LD entity graph — parsed by Google rich results and AI search engines
 const personJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: info.name,
-  jobTitle: info.designation,
-  description: info.summary,
-  url: siteConfig.url,
-  worksFor: { "@type": "Organization", name: info.organization },
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Gurugram",
-    addressCountry: "IN",
-  },
-  sameAs: [
-    "https://github.com/dev-swapnilx",
-    "https://www.linkedin.com/in/swapnil-2069961ba/",
-    "https://leetcode.com/sswapnil_be20/",
-  ],
-  knowsAbout: [
-    "Large Language Models",
-    "Retrieval-Augmented Generation",
-    "Multi-agent systems",
-    "LangGraph",
-    "LangChain",
-    "MLOps",
-    "AWS",
-    "Python",
-    "Vector search",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteConfig.url}/#website`,
+      url: `${siteConfig.url}/`,
+      name: "Swapnil — AI Engineer",
+      inLanguage: "en",
+      publisher: { "@id": `${siteConfig.url}/#person` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${siteConfig.url}/#person`,
+      name: info.name,
+      alternateName: ["dev-swapnilx", "devxswapnil"],
+      jobTitle: ["Senior Data Scientist", "AI Engineer"],
+      description: info.summary,
+      url: `${siteConfig.url}/`,
+      email: `mailto:${info.email}`,
+      worksFor: {
+        "@type": "Organization",
+        name: "Kissht",
+        legalName: "Si Creva Capital Services Pvt. Ltd.",
+        url: "https://www.kissht.com",
+      },
+      alumniOf: {
+        "@type": "CollegeOrUniversity",
+        name: "Thapar Institute of Engineering and Technology",
+      },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Gurugram",
+        addressRegion: "Haryana",
+        addressCountry: "IN",
+      },
+      sameAs: [
+        "https://github.com/dev-swapnilx",
+        "https://www.linkedin.com/in/swapnil-2069961ba/",
+        "https://leetcode.com/sswapnil_be20/",
+        "https://www.npmjs.com/package/dev-swapnilx",
+      ],
+      knowsAbout: [
+        "Large Language Models",
+        "Retrieval-Augmented Generation",
+        "Multi-agent systems",
+        "LangGraph",
+        "LangChain",
+        "MLOps",
+        "AWS",
+        "Python",
+        "Vector search",
+      ],
+    },
   ],
 };
 

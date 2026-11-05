@@ -12,6 +12,7 @@ import safestepProject from "@/data/projects/safestep.json";
 import agrisiteProject from "@/data/projects/agrisite.json";
 import cognicodemlProject from "@/data/projects/cognicodeml.json";
 import personalNpxCardProject from "@/data/projects/personalNpxCard.json";
+import resume from "@/data/about/resume.json";
 
 // === Virtual File System (typed) ===
 type FileContent =
@@ -77,51 +78,7 @@ const helpCommand = [
   { command: "experience", description: "displays work experience" },
 ];
 
-const skills: { group: string; items: string }[] = [
-  {
-    group: "GenAI & LLM",
-    items:
-      "RAG, agentic & multi-agent workflows (LangGraph, LangChain), function calling, prompt engineering, fine-tuning, MCP, Hugging Face, LangSmith, MLOps",
-  },
-  {
-    group: "ML & Data",
-    items:
-      "embeddings, vector search, OCR & document processing, model serving (MLflow), Pinecone, FAISS",
-  },
-  {
-    group: "Languages & Frameworks",
-    items: "Python, C++, Go, SQL, Flask, Streamlit, Crawl4AI, Selenium, Puppeteer",
-  },
-  {
-    group: "Data & Cloud",
-    items:
-      "MongoDB, MySQL, Redis, Snowflake, Elasticsearch; AWS (Lambda, SageMaker, ECS, S3, DynamoDB, CloudWatch)",
-  },
-  {
-    group: "DevOps & Systems",
-    items:
-      "Docker, Kubernetes, Jenkins, Kafka, Airflow, Git, Linux, REST APIs, Microservices, Distributed Systems",
-  },
-];
-
-const experience: { role: string; org: string; period: string }[] = [
-  {
-    role: "Senior Data Scientist",
-    org: "Kissht (Si Creva Capital Services)",
-    period: "Apr 2026 – Present",
-  },
-  { role: "AI Engineer", org: "DevSecOps", period: "Aug 2025 – Apr 2026" },
-  {
-    role: "Software Engineer",
-    org: "Hindustan Times",
-    period: "Jul 2024 – Aug 2025",
-  },
-  {
-    role: "B.E. Computer Science",
-    org: "Thapar Institute of Engineering and Technology",
-    period: "2020 – 2024",
-  },
-];
+const { skills, experience } = resume;
 
 // Union type for history entries
 type HistoryEntry = string | { __output: ReactNode };
@@ -416,6 +373,7 @@ export default function Terminal() {
             <form onSubmit={handleSubmit} className="flex-1 ml-2">
               <input
                 type="text"
+                aria-label="Terminal command input"
                 className="w-full border-none outline-none bg-transparent"
                 autoFocus
                 value={value}

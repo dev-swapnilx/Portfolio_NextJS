@@ -23,7 +23,12 @@ Senior Data Scientist at Kissht (Si Creva Capital Services), Gurugram, India.
 
 ## Links
 
-- GitHub: https://github.com/dev-swapnilx
-- LinkedIn: https://www.linkedin.com/in/swapnil-2069961ba/
-- LeetCode: https://leetcode.com/sswapnil_be20/
+- [Portfolio](https://devxswapnil.in/): this site — profile, experience, skills
+- [Projects](https://devxswapnil.in/projects): open-source and side projects
+- [GitHub](https://github.com/dev-swapnilx): code and repositories
+- [LinkedIn](https://www.linkedin.com/in/swapnil-2069961ba/): professional profile
+- [LeetCode](https://leetcode.com/sswapnil_be20/): problem solving
+- [npm](https://www.npmjs.com/package/dev-swapnilx): `npx dev-swapnilx` terminal card
 - Contact: swapnil.devx@gmail.com
+
+Last updated: 2026-11-05
