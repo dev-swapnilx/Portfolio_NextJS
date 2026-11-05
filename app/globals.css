@@ -50,6 +50,5 @@
 }
 
 .scrollcontainer::-webkit-scrollbar-thumb {
-  /* terminal is always dark, so the thumb is too */
-  @apply rounded-md bg-[#212121];
+  @apply rounded-md bg-zinc-200 dark:bg-[#212121];
 }
