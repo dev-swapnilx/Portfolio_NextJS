@@ -1,7 +1,7 @@
 import "./globals.css";
 import clsx from "clsx";
 import type { Metadata, Viewport } from "next";
-import { Roboto_Mono } from "next/font/google";
+import { Inter, Roboto_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import Topbar from "../components/navbar";
 import Providers from "./providers";
@@ -9,8 +9,16 @@ import Terminal from "../components/terminal";
 import { siteConfig } from "../config/site";
 import info from "../data/about/info.json";
 
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
 const roboto_mono = Roboto_Mono({
   subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto-mono",
 });
 
 const description =
@@ -111,7 +119,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={roboto_mono.className}>
+    <html
+      lang="en"
+      className={clsx(inter.variable, roboto_mono.variable, "font-sans")}
+    >
       <body className="antialiased min-h-screen">
         <script
           type="application/ld+json"

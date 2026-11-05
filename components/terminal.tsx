@@ -246,7 +246,7 @@ export default function Terminal() {
       const isAtRoot = currentPath === "/"
       if (arg === "..") {
         if (isAtRoot) {
-          output = <p className="text-yellow-500">Already at root directory ~</p>;
+          output = <p className="text-yellow-300">Already at root directory ~</p>;
         } else {
           router.back();
         }
@@ -279,7 +279,7 @@ export default function Terminal() {
     } else if (cmd === "ls") {
       const files = getFilesInCurrentDir();
       output = (
-        <p className="text-cyan-500 dark:text-cyan-400 font-mono text-xs">
+        <p className="text-cyan-400 font-mono text-xs">
           {files.join("    ")}
         </p>
       );
@@ -287,7 +287,7 @@ export default function Terminal() {
       const fileData = filesystem[currentPath]?.[arg];
       if (fileData) {
         output = (
-          <pre className="text-green-700 dark:text-green-400 text-xs font-mono whitespace-pre-wrap">
+          <pre className="text-green-400 text-xs font-mono whitespace-pre-wrap">
             {JSON.stringify(fileData, null, 2)}
           </pre>
         );
@@ -335,10 +335,10 @@ export default function Terminal() {
 
   return (
     <div
-      className="relative h-60 mb-6 bg-gray-100 dark:bg-[#171717] rounded-md text-sm overflow-hidden flex flex-col focus-within:ring-1 focus-within:ring-neutral-400"
+      className="relative h-60 mb-6 bg-[#171717] text-neutral-100 font-mono rounded-md text-sm overflow-hidden flex flex-col focus-within:ring-1 focus-within:ring-neutral-400"
       onClick={() => inputRef.current?.focus()}
     >
-      <div className="sticky top-0 left-0 right-0 h-6 bg-zinc-300 dark:bg-[#323232] flex pl-2 ">
+      <div className="sticky top-0 left-0 right-0 h-6 bg-[#323232] flex pl-2 ">
         <div className="flex space-x-2 items-center my-auto">
           <button
             type="button"
@@ -367,10 +367,10 @@ export default function Terminal() {
             return (
               <div key={i}>
                 <p>
-                  <span className="text-yellow-500 dark:text-yellow-300">
+                  <span className="text-yellow-300">
                     →{" "}
                   </span>
-                  <span className="text-pink-600 dark:text-pink-300">~ </span>
+                  <span className="text-pink-300">~ </span>
                   {data}
                 </p>
 
@@ -383,8 +383,8 @@ export default function Terminal() {
 
           <div className="flex">
             <p>
-              <span className="text-yellow-500 dark:text-yellow-300">→ </span>
-              <span className="text-pink-600 dark:text-pink-300">~ </span>
+              <span className="text-yellow-300">→ </span>
+              <span className="text-pink-300">~ </span>
             </p>
 
             <form onSubmit={handleSubmit} className="flex-1 ml-2">
@@ -405,7 +405,7 @@ export default function Terminal() {
 
           {tabHint && (
             <div className="pl-8 -mt-1">
-              <p className="text-cyan-500 dark:text-cyan-400 text-xs font-mono">
+              <p className="text-cyan-400 text-xs font-mono">
                 {tabHint}
               </p>
             </div>
@@ -449,13 +449,13 @@ function CmdResult({ type, clear }: { type: string; clear: () => void }) {
     return (
       <div className="flex flex-col space-y-2">
         <a
-          className="underline underline-offset-4 text-blue-500 dark:text-blue-300"
+          className="underline underline-offset-4 text-blue-300"
           href="mailto:swapnil.devx@gmail.com"
         >
           swapnil.devx@gmail.com
         </a>
         <a
-          className="underline underline-offset-4 text-blue-500 dark:text-blue-300"
+          className="underline underline-offset-4 text-blue-300"
           href="tel:+916239320323"
         >
           +91 62393 20323
@@ -468,7 +468,7 @@ function CmdResult({ type, clear }: { type: string; clear: () => void }) {
       <p>
         You can check out my leetcode profile here:{" "}
         <a
-          className="underline underline-offset-4 text-blue-500 dark:text-blue-300"
+          className="underline underline-offset-4 text-blue-300"
           href="https://leetcode.com/sswapnil_be20/"
           target="_blank"
           rel="noopener noreferrer"
@@ -484,8 +484,8 @@ function CmdResult({ type, clear }: { type: string; clear: () => void }) {
       <div className="flex flex-col space-y-1.5 text-xs font-mono">
         {skills.map((s, i) => (
           <div key={i}>
-            <span className="text-cyan-500 dark:text-cyan-400">{s.group}: </span>
-            <span className="text-green-700 dark:text-green-400">{s.items}</span>
+            <span className="text-cyan-400">{s.group}: </span>
+            <span className="text-green-400">{s.items.join(", ")}</span>
           </div>
         ))}
       </div>
@@ -497,10 +497,10 @@ function CmdResult({ type, clear }: { type: string; clear: () => void }) {
         {experience.map((e, i) => (
           <div key={i} className="flex justify-between gap-4">
             <span>
-              <span className="text-cyan-500 dark:text-cyan-400">{e.role}</span>
-              <span className="text-neutral-600 dark:text-neutral-400"> @ {e.org}</span>
+              <span className="text-cyan-400">{e.role}</span>
+              <span className="text-neutral-400"> @ {e.org}</span>
             </span>
-            <span className="text-neutral-600 dark:text-neutral-400 whitespace-nowrap">{e.period}</span>
+            <span className="text-neutral-400 whitespace-nowrap">{e.period}</span>
           </div>
         ))}
       </div>

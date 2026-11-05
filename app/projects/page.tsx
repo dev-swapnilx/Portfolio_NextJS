@@ -25,7 +25,7 @@ function Chips({ project }: { project: Project }) {
       {project.stack.map((tech) => (
         <span
           key={tech}
-          className="text-xs px-1.5 py-0.5 rounded border border-[#ecebeb] dark:border-[#333] text-neutral-600 dark:text-neutral-400"
+          className="text-xs px-1.5 py-0.5 rounded border border-[#ecebeb] dark:border-[#333] text-neutral-600 dark:text-neutral-400 font-mono"
         >
           {tech}
         </span>
@@ -111,7 +111,7 @@ export default async function Page() {
 
       <section>
         <h2 className="text-sm font-medium mb-3">
-          <span className="text-green-700 dark:text-green-400"># </span>
+          <span className="text-green-700 dark:text-green-400 font-mono"># </span>
           Production work
         </h2>
         <div className="grid grid-cols-1 gap-4">
@@ -125,7 +125,7 @@ export default async function Page() {
 
       <section>
         <h2 className="text-sm font-medium mb-3">
-          <span className="text-green-700 dark:text-green-400"># </span>
+          <span className="text-green-700 dark:text-green-400 font-mono"># </span>
           Earlier projects
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
