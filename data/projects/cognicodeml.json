@@ -1,7 +1,7 @@
 {
-  "name": "CogniCodeML: v1.0 - C++ Consciousness Unleashed",
+  "name": "CogniCodeML: Classic ML Algorithms in C++",
   "url": "https://github.com/dev-swapnilx/Machine_Learning",
-  "description": "A C++ repository housing kNN, K-Means, and Neural Network implementations on MNIST Handwriting and Iris Datasets, optimized for efficiency and clarity.",
+  "description": "kNN, K-Means, and neural-network implementations in C++ on the MNIST handwritten-digit and Iris datasets, optimized for efficiency and clarity",
   "stack": [
     "C++",
     "kNN",

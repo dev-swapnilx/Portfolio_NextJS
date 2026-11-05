@@ -27,8 +27,8 @@ export default function Topbar() {
   const { isOpen, toggleIsOpen } = useContext(TerminalContext);
 
   return (
-    <header>
-      <div className="mb-8 flex justify-between items-center">
+    <header className="lg:sticky lg:top-8 lg:self-start">
+      <div className="mb-8 flex justify-between items-center lg:flex-col lg:items-start lg:gap-5 lg:mb-6">
         <div className="flex items-center space-x-3">
           <div
             aria-hidden="true"
@@ -93,7 +93,7 @@ export default function Topbar() {
             ></div>
         </div>
       </div>
-      <nav className="mb-6 flex justify-between items-center">
+      <nav className="mb-6 flex justify-between items-center lg:flex-col lg:items-start lg:gap-3">
         <div className="flex flex-row space-x-4">
           {Object.entries(navItems).map(([path, { name }]) => {
             const isActive = path === pathname;
@@ -120,6 +120,12 @@ export default function Topbar() {
           href={resumeUrl}
         >
           resume<span className="sr-only"> (opens in new tab)</span>
+        </a>
+        <a
+          className="hidden lg:block underline underline-offset-4 text-sm text-neutral-600 dark:text-neutral-400"
+          href={`mailto:${info.email}`}
+        >
+          {info.email}
         </a>
       </nav>
     </header>

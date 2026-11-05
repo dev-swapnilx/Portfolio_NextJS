@@ -1,7 +1,7 @@
 {
-  "name": "SafeStep: Early Fall Prediction for Senior Citizens with IOT",
+  "name": "SafeStep: Early Fall Prediction for Senior Citizens with IoT",
   "url": "https://github.com/dev-swapnilx/SafeStep.git",
-  "description": "IoT device with ML for fall prediction, triggering alarms and inflating jackets for elder safety",
+  "description": "IoT wearable that predicts falls with ML, triggering alarms and inflating a protective jacket for elder safety",
   "stack": [
     "Python",
     "C++",

@@ -2,7 +2,7 @@ import "./globals.css";
 import clsx from "clsx";
 import { headers } from "next/headers";
 import type { Metadata, Viewport } from "next";
-import { Inter, Roboto_Mono } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import Topbar from "../components/navbar";
 import Providers from "./providers";
@@ -13,16 +13,12 @@ import info from "../data/about/info.json";
 // Dynamic rendering is required for the per-request CSP nonce (middleware.ts)
 export const dynamic = "force-dynamic";
 
-const inter = Inter({
+// All-monospace direction (Task 1): JetBrains Mono is text-optimized,
+// noticeably better than Roboto Mono for prose while staying terminal-true.
+const jetbrains_mono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
-});
-
-const roboto_mono = Roboto_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-roboto-mono",
+  variable: "--font-mono",
 });
 
 const description =
@@ -125,20 +121,22 @@ export default function RootLayout({
   // Per-request CSP nonce from middleware, for next-themes' inline script
   const nonce = headers().get("x-nonce") ?? undefined;
   return (
-    <html
-      lang="en"
-      className={clsx(inter.variable, roboto_mono.variable, "font-sans")}
-    >
+    <html lang="en" className={clsx(jetbrains_mono.variable, "font-mono")}>
       <body className="antialiased min-h-screen">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
         <Providers nonce={nonce}>
-          <div className="flex flex-col container pt-8">
-            <Topbar />
-            <main className="mb-8">{children}</main>
-            <Terminal />
+          <div className="container pt-8">
+            {/* Task 1.1: sticky identity rail + scrolling content at lg+ */}
+            <div className="lg:grid lg:grid-cols-[18rem_1fr] lg:gap-12">
+              <Topbar />
+              <div className="min-w-0">
+                <main className="mb-8">{children}</main>
+                <Terminal />
+              </div>
+            </div>
             <Analytics />
           </div>
         </Providers>

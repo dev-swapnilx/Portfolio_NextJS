@@ -27,7 +27,13 @@
 
 @media (min-width: 1024px) {
   .container {
-    max-width: 760px;
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1152px;
   }
 }
 
