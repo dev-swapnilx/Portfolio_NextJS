@@ -39,7 +39,13 @@ function toggleIsOpen() {
   listeners.forEach((l) => l());
 }
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+export default function Providers({
+  children,
+  nonce,
+}: {
+  children: React.ReactNode;
+  nonce?: string;
+}) {
   // Server always renders closed; client restores the stored choice on hydrate
   const isOpen = useSyncExternalStore(subscribe, getSnapshot, () => false);
 
@@ -49,6 +55,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       defaultTheme="system"
       enableSystem
       disableTransitionOnChange
+      nonce={nonce}
     >
       <TerminalContext.Provider value={{ isOpen, toggleIsOpen }}>
         {children}

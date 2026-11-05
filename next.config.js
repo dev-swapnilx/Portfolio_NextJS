@@ -5,10 +5,9 @@ const nextConfig = {
       {
         source: "/(.*)",
         headers: [
-          // ponytail: no `preload` — preload-list enrollment is hard to reverse; add it deliberately if wanted
           {
             key: "Strict-Transport-Security",
-            value: "max-age=63072000; includeSubDomains",
+            value: "max-age=63072000; includeSubDomains; preload",
           },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "DENY" },
