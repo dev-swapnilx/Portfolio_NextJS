@@ -135,10 +135,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
         <Providers nonce={nonce}>
-          <div className="flex flex-col container pt-8">
-            <Topbar />
-            <main className="mb-8">{children}</main>
-            <Terminal />
+          <div className="container pt-8">
+            {/* Task 1.1: sticky identity rail + scrolling content at lg+ */}
+            <div className="lg:grid lg:grid-cols-[18rem_1fr] lg:gap-12">
+              <Topbar />
+              <div className="min-w-0">
+                <main className="mb-8">{children}</main>
+                <Terminal />
+              </div>
+            </div>
             <Analytics />
           </div>
         </Providers>
