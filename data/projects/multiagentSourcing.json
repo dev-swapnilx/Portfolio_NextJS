@@ -1,0 +1,8 @@
+{
+  "name": "Multi-Agent Sourcing & Extraction Service",
+  "description": "Multi-agent sourcing service automating newsletters and RSS feeds for 400K+ companies, with extraction pipelines processing 80K+ news articles daily and Hugging Face microservices handling 10K+ unstructured documents a day at 95% accuracy.",
+  "kind": "work",
+  "org": "DevSecOps",
+  "year": "2025–26",
+  "stack": ["LangGraph", "Crawl4AI", "Hugging Face", "Python"]
+}

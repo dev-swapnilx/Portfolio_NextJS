@@ -1,5 +1,11 @@
 {
   "name": "Argri-Site: Weed detection and removal drone",
   "url": "https://github.com/dev-swapnilx/Argri-Site.git",
-  "description": "Autonomous drone for weed detection using Raspberry Pi and ML, aiding precision herbicide application"
+  "description": "Autonomous drone for weed detection using Raspberry Pi and ML, aiding precision herbicide application",
+  "stack": [
+    "Python",
+    "ML",
+    "Raspberry Pi"
+  ],
+  "year": "2023"
 }

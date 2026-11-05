@@ -1,0 +1,8 @@
+{
+  "name": "NLP-Driven Global Search Service",
+  "description": "Global search powered by LangGraph function calling over MongoDB indexes, handling 50K+ daily requests — trimmed query latency from 10s to 2s and drove a 90% click-through rate.",
+  "kind": "work",
+  "org": "Hindustan Times",
+  "year": "2024–25",
+  "stack": ["LangGraph", "MongoDB", "Python", "AWS Airflow"]
+}

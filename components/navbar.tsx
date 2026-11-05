@@ -29,11 +29,25 @@ export default function Topbar() {
   return (
     <header>
       <div className="mb-8 flex justify-between items-center">
-        <div>
-          <h1 className="font-bold text-xl">{info.name}</h1>
-          <p className="text-sm text-neutral-500">
-            {`${info.designation} · ${info.location}`}
-          </p>
+        <div className="flex items-center space-x-3">
+          <div
+            aria-hidden="true"
+            className="h-11 w-11 rounded-lg bg-gray-100 dark:bg-[#1c1c1c] border border-[#ecebeb] dark:border-[#333] flex items-center justify-center font-bold text-lg select-none"
+          >
+            {info.name.charAt(0)}
+            <span className="text-green-600 dark:text-green-400 cursor-blink font-normal">
+              _
+            </span>
+          </div>
+          <div>
+            <h1 className="font-bold text-2xl leading-tight">{info.name}</h1>
+            <p className="text-sm text-neutral-500">
+              <span className="text-neutral-700 dark:text-neutral-300">
+                {info.designation}
+              </span>
+              {` · ${info.location}`}
+            </p>
+          </div>
         </div>
         <div className="relative flex items-center space-x-2 py-2">
           <SocialsLink aria-label="GitHub profile" href="https://github.com/dev-swapnilx">

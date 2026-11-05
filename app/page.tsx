@@ -27,7 +27,7 @@ export default function Page() {
       </p>
 
       <section>
-        <h2 className="text-sm font-medium mb-3">Experience</h2>
+        <h2 className="text-sm font-medium mb-3"><span className="text-green-600 dark:text-green-400"># </span>Experience</h2>
         <ul className="space-y-3">
           {resume.experience.map((e, i) => (
             <li key={i} className="text-sm">
@@ -53,7 +53,24 @@ export default function Page() {
       </section>
 
       <section>
-        <h2 className="text-sm font-medium mb-3">Skills</h2>
+        <h2 className="text-sm font-medium mb-3"><span className="text-green-600 dark:text-green-400"># </span>Education</h2>
+        {resume.education.map((e, i) => (
+          <div key={i} className="flex justify-between gap-4 text-sm">
+            <span>
+              <span className="text-neutral-800 dark:text-neutral-200">
+                {e.degree}
+              </span>
+              <span className="text-neutral-500"> · {e.org}</span>
+            </span>
+            <span className="text-neutral-500 text-xs whitespace-nowrap pt-0.5">
+              {e.period}
+            </span>
+          </div>
+        ))}
+      </section>
+
+      <section>
+        <h2 className="text-sm font-medium mb-3"><span className="text-green-600 dark:text-green-400"># </span>Skills</h2>
         <ul className="space-y-1.5">
           {resume.skills.map((s, i) => (
             <li key={i} className="text-xs leading-relaxed">

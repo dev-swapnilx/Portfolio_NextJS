@@ -13,20 +13,13 @@ import agrisiteProject from "@/data/projects/agrisite.json";
 import cognicodemlProject from "@/data/projects/cognicodeml.json";
 import personalNpxCardProject from "@/data/projects/personalNpxCard.json";
 import resume from "@/data/about/resume.json";
+import mlcentralProject from "@/data/projects/mlcentral.json";
+import multiagentProject from "@/data/projects/multiagentSourcing.json";
+import nlpSearchProject from "@/data/projects/nlpGlobalSearch.json";
 
-// === Virtual File System (typed) ===
-type FileContent =
-  | {
-      name: string;
-      organization: string;
-      designation: string;
-      location: string;
-      email: string;
-      phone: string;
-      summary: string;
-    }
-  | { name: string; url: string; description: string }
-  | null;
+// === Virtual File System ===
+// cat just pretty-prints whatever JSON lives at the path
+type FileContent = Record<string, unknown> | null;
 
 const filesystem: Record<string, Record<string, FileContent>> = {
   "/": { "about/": null, "projects/": null },
@@ -39,7 +32,10 @@ const filesystem: Record<string, Record<string, FileContent>> = {
     "safestep.json": safestepProject,
     "agrisite.json": agrisiteProject,
     "cognicodeml.json": cognicodemlProject,
-    "personalNpxCard.json": personalNpxCardProject
+    "personalNpxCard.json": personalNpxCardProject,
+    "mlcentral.json": mlcentralProject,
+    "multiagentSourcing.json": multiagentProject,
+    "nlpGlobalSearch.json": nlpSearchProject
   }
 };
 
@@ -91,7 +87,7 @@ export default function Terminal() {
   const [tabHint, setTabHint] = useState("");
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const terminalEndRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const pathname = usePathname();
   const { setTheme } = useTheme();
@@ -120,6 +116,9 @@ export default function Terminal() {
         "agrisite.json",
         "cognicodeml.json",
         "personalNpxCard.json",
+        "mlcentral.json",
+        "multiagentSourcing.json",
+        "nlpGlobalSearch.json",
       ];
     }
 
@@ -128,12 +127,19 @@ export default function Terminal() {
   };
 
   const scrollToBottom = () => {
-    terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Scroll only the terminal pane, never the page
+    const el = scrollRef.current;
+    if (el) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
   };
 
   useEffect(() => {
     scrollToBottom();
   }, [history, tabHint]);
+
+  // Focus without scrolling the page down to the terminal on load
+  useEffect(() => {
+    inputRef.current?.focus({ preventScroll: true });
+  }, []);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const trimmed = value.trim();
@@ -337,7 +343,7 @@ export default function Terminal() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto scrollcontainer">
+      <div className="flex-1 overflow-y-auto scrollcontainer" ref={scrollRef}>
         <div className="px-1 py-1">
           {history.map((entry, i) => {
             if (typeof entry === "object" && "__output" in entry) {
@@ -375,7 +381,6 @@ export default function Terminal() {
                 type="text"
                 aria-label="Terminal command input"
                 className="w-full border-none outline-none bg-transparent"
-                autoFocus
                 value={value}
                 onChange={(e) => {
                   setValue(e.target.value);
@@ -395,7 +400,6 @@ export default function Terminal() {
             </div>
           )}
         </div>
-        <div ref={terminalEndRef} />
       </div>
     </div>
   );

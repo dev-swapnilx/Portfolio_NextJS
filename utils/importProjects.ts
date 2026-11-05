@@ -4,8 +4,12 @@ import path from 'path';
 export interface Project {
   id: string;
   name: string;
-  url: string;
+  url?: string;
   description: string;
+  stack?: string[];
+  year?: string;
+  kind?: "work" | "personal";
+  org?: string;
 }
 
 // This function will be used in a server component
@@ -20,8 +24,9 @@ export async function getProjects(): Promise<Project[]> {
         const filePath = path.join(projectsDir, fileName);
         const fileContent = await fs.readFile(filePath, 'utf8');
         const id = fileName.replace(/\.json$/, '');
-        const { name, url, description } = JSON.parse(fileContent);
-        return { id, name, url, description };
+        const { name, url, description, stack, year, kind, org } =
+          JSON.parse(fileContent);
+        return { id, name, url, description, stack, year, kind, org };
       })
   );
 

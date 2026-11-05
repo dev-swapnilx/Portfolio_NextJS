@@ -1,0 +1,8 @@
+{
+  "name": "ML-Central: Unified ML Feature & Scoring Platform",
+  "description": "Dockerized single source of truth for all feature and target code across teams, with on-demand Amazon ECS scoring for legacy backfill — cut infra costs 40% across 15+ models and raised point-in-time reproducibility from 70% to 98%+.",
+  "kind": "work",
+  "org": "Kissht",
+  "year": "2026",
+  "stack": ["Python", "Docker", "Amazon ECS", "Snowflake", "MLflow"]
+}
