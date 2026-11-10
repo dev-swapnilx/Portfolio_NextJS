@@ -12,7 +12,9 @@ const profilePageJsonLd = {
   name: "Swapnil — AI Engineer",
   isPartOf: { "@id": "https://devxswapnil.in/#website" },
   mainEntity: { "@id": "https://devxswapnil.in/#person" },
-  dateModified: "2026-11-05",
+  // Google's ProfilePage spec wants full ISO 8601 date-time with timezone
+  dateCreated: "2026-10-01T09:00:00+05:30",
+  dateModified: "2026-11-10T09:00:00+05:30",
 };
 
 // Bold the quantified wins so proof pops out of the gray (§9.3)
